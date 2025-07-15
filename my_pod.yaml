@@ -1,0 +1,128 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2025-06-11T13:16:46Z"
+  generation: 1
+  labels:
+    run: nginx2
+  name: nginx2
+  namespace: default
+  resourceVersion: "37591"
+  uid: 261301c0-eff1-48c3-b9f5-474aa9f16408
+spec:
+  containers:
+  - image: nexus.runc.info/nginx
+    imagePullPolicy: Always
+    name: nginx2
+    resources:
+      limits:
+        memory: 500Mi
+      requests:
+        memory: 250Mi    
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hpz94
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-hpz94
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-01T06:09:03Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-11T13:16:46Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-01T06:09:02Z"
+    message: 'containers with unready status: [nginx2]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2025-07-01T06:09:02Z"
+    message: 'containers with unready status: [nginx2]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2025-06-11T13:16:46Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://c00d3a26755dd4d7063380cceb065e3a317c9aa78e5eea6d9687a6d9e107d8b9
+    image: nexus.runc.info/nginx:latest
+    imageID: docker-pullable://nexus.runc.info/nginx@sha256:6784fb0834aa7dbbe12e3d7471e69c290df3e6ba810dc38b34ae33d3c1c05f7d
+    lastState:
+      terminated:
+        containerID: docker://c00d3a26755dd4d7063380cceb065e3a317c9aa78e5eea6d9687a6d9e107d8b9
+        exitCode: 0
+        finishedAt: "2025-06-11T15:58:31Z"
+        reason: Completed
+        startedAt: "2025-06-11T13:17:50Z"
+    name: nginx2
+    ready: false
+    resources: {}
+    restartCount: 0
+    started: false
+    state:
+      waiting:
+        message: 'Back-off pulling image "nexus.runc.info/nginx": ErrImagePull: Error
+          response from daemon: manifest for nexus.runc.info/nginx:latest not found:
+          manifest unknown: manifest unknown'
+        reason: ImagePullBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hpz94
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.49.2
+  hostIPs:
+  - ip: 192.168.49.2
+  phase: Running
+  podIP: 10.244.0.14
+  podIPs:
+  - ip: 10.244.0.14
+  qosClass: BestEffort
+  startTime: "2025-06-11T13:16:46Z"
