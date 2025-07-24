@@ -10,5 +10,5 @@ spec:
       httpGet:
         path: /dkchdsjksah
         port: 80
-    periodSeconds: 1
-    failureThreshold: 4
+      periodSeconds: 1
+      failureThreshold: 4
