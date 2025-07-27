@@ -27,6 +27,6 @@ spec:
       exec:
         command:
         - "cat"
-        - "/usr/share/nginx/html/index.html"
+        - "/usr/share/nginx/aaa/index.html"
       periodSeconds: 1
       failureThreshold: 3
